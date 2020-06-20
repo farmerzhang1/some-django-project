@@ -195,15 +195,15 @@ def loginPage(request):
 
 @unauthenticated_user
 def registerPage(request):
-	form = CreateUserForm()
+	user_form = CreateUserForm()
 	context = {
-		'form': form,
+		'user_form': user_form,
 	}
 	if request.method == 'POST':
-		form = CreateUserForm(request.POST)
-		if form.is_valid():
-			user = form.save()
-			username = form.cleaned_data.get('username')
+		user_form = CreateUserForm(request.POST)
+		if user_form.is_valid():
+			user = user_form.save()
+			username = user_form.cleaned_data.get('username')
 			'''
 			group = Group.objects.get(name = 'customer')
 			user.groups.add(group)
@@ -213,6 +213,9 @@ def registerPage(request):
 			)'''
 			messages.success(request, 'Account ' + username + ' created')
 			return redirect('login')
+		else:
+			print('not valid')
+			print(customer_form.errors)
 	return render(request, 'accounts/register.html', context)
 
 def logoutPage(request):

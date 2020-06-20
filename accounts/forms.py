@@ -14,6 +14,12 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+
+    '''def save(self, commit=True):
+        user = super(CreateUserForm, self).save(commit=False)
+        if commit:
+            user.save()
+        return user'''
 class CustomerForm(ModelForm):
     profile_pic = forms.ImageField(widget=forms.FileInput)
     class Meta:
