@@ -10,6 +10,7 @@ class Customer(models.Model):
     profile_pic = models.ImageField(default = 'default_ba.jpg', null=True, blank=True)
     def __str__(self):
         return self.name
+
 class Tag(models.Model):
     name = models.CharField(max_length=255, null=True)
 
