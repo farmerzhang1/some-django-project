@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect
 
-def unauthenticated_user(view_func):#used in login and register.
+def unauthenticated_user(view_func): # used in login and register.
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect('home')
@@ -29,6 +29,6 @@ def admin_only(view_func):
             group = request.user.groups.all()[0].name
         if group == 'admin':
             return view_func(request, *args, **kwargs)
-        else: 
+        else:
             return redirect('user-page')
     return wrapper_func

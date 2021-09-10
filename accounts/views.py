@@ -125,13 +125,13 @@ class CustomerView(View):
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles = ['customer', 'admin'])
 def accountSettings(request):
-	form = CustomerForm(instance=request.user.customer)
+	form = CustomerForm(instance = request.user.customer)
 	context = { 'form': form }
 	if request.method == 'POST':
 		form = CustomerForm(request.POST, request.FILES, instance=request.user.customer)
 		if form.is_valid():
 			form.save()
-	return render(request, 'accounts/account_settingsss.html', context)
+	return render(request, 'accounts/account_settings.html', context)
 
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles = ['admin'])
@@ -215,7 +215,7 @@ def registerPage(request):
 			return redirect('login')
 		else:
 			print('not valid')
-			print(customer_form.errors)
+			print(user_form.errors)
 	return render(request, 'accounts/register.html', context)
 
 def logoutPage(request):
