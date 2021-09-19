@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import *
 # Create your views here.
-def test1Page(request):
-    return render(request, 'fm/test1.html')
+def mainPage(request):
+    return render(request, 'fm/main.html')
 
 def test2Page(request):
     return render(request, 'fm/test2.html')

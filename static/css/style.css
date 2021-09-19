@@ -1,0 +1,126 @@
+.main {
+  background-color: #c8e8e0;
+  min-height: 852px;
+  box-sizing: border-box;
+}
+body {
+margin: 0;
+}
+h1, h2, h3, h4, p, li {
+  font-family: 'Source Sans Pro',sans-serif;
+}
+h4 {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-style: normal;
+  margin: 0 82px 0;
+  color: #2e937a;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-align: center;
+  padding: 50px 0 0 0;
+}
+h4.header {
+  letter-spacing: 0px;
+  text-transform: none;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 25px auto 0;
+}
+h1 {
+  text-transform: none;
+  font-weight: 600;
+  font-size: 3rem;
+  margin: 0 auto 0;
+  color: #2e937a;
+  text-align: center;
+  padding: 30px;
+}
+p {
+  color: #376358;
+  margin-left: 20px;
+}
+nav ul{
+list-style-type: none;
+display:flex;
+}
+ul li{
+margin: 0px 50px 0px 0px;
+color: rgb(155, 151, 152);
+}
+.logo {
+margin-top: 26px;
+margin-right: -1px;
+margin-bottom: -34px;
+margin-left: 30px;
+}
+.list {
+  width: 940px;
+  margin: 49px auto 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+.repeat {
+  grid-template-columns: repeat(3, calc(33.333333333333336% - 18px));
+  min-height: 338px;
+  grid-gap: 27px;
+  display: grid;
+}
+.list .block {
+  border-radius: 20px;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.container {
+  border-radius: 20px;
+  padding: 20px 20px 40px;
+  justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+  max-width: 100%;
+  color: #111111;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+.container img {
+  object-fit: contain;
+  background-size: contain;
+  height: 218px;
+}
+
+
+a.btn {
+  color: #ffffff;
+  background-color: #2e937a;
+  border-width: 2px;
+  background-image: none;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-style: solid;
+  margin: 25px auto 0;
+  padding: 8px 46px 9px 47px;
+  cursor: pointer;
+  border-radius: 50px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+footer {
+  min-height: 59px}
+/*
+footer::before {
+  content: '';
+  display: "table";
+} */
+footer p {
+  text-align:center;
+}
