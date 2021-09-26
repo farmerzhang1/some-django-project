@@ -30,7 +30,7 @@ def upload_file(request):
             with default_storage.open('tmp/something.spthy', 'wb+') as destination:
                 for chunk in file_obj.chunks():
                     destination.write(chunk)
-            process = subprocess.run([settings.MEDIA_ROOT+'bin', settings.MEDIA_ROOT+'tmp/something.spthy'], capture_output=True)
+            process = subprocess.run([settings.BIN_ROOT+'bin', settings.MEDIA_ROOT+'tmp/something.spthy'], capture_output=True)
             output1 = process.stdout
             print(output1)
             print(request.FILES['file'])
