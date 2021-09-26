@@ -20,11 +20,22 @@
     <h1>The Starbuzz Bean Machine</h1>
     <h2>Fill out the form below and click "order now" to order</h2>
 
-    <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+    <!-- <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" name="whattt">
-    </form>
+        <input class="btn" type="submit" name="can this be ommited">
+    </form> -->
+    <div class="file-upload-container">
+      <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+        <div class="file-upload-wrapper" data-text="Select your file!">
+          {{ form.file }}
+          <!-- <input name="file-upload-field" type="file" class="file-upload-field" value=""> -->
+          <input class="btn upload" type="submit" name="can this be ommited">
+        </div>
+      </form>
+    </div>
   </div>
+  <footer>
+    <p>Sample text121</p>
+  </footer>
   </body>
 </html>
-
