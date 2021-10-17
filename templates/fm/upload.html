@@ -1,38 +1,37 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>The Starbuzz Bean Machine</title>
+    <title>upload</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/upload.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
   </head>
   <body>
     <nav>
       <ul>
-        <li class="active">Main</li>
+        <li>Main</li>
         <li>1</li>
         <li>2</li>
         <li>3</li>
       </ul>
     </nav>
 
-  <div class="main">
-    <h1>The Starbuzz Bean Machine</h1>
-    <h2>Fill out the form below and click "order now" to order</h2>
+  <div class="sub">
+    <h1>Test</h1>
+    <h2>Upload your file and give it a try!</h2>
 
-    <!-- <form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-        {{ form.as_p }}
-        <input class="btn" type="submit" name="can this be ommited">
-    </form> -->
-    <div class="file-upload-container">
+    <div class="upload-container">
       <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
         <div class="file-upload-wrapper" data-text="Select your file!">
-          {{ form.file }}
-          <!-- <input name="file-upload-field" type="file" class="file-upload-field" value=""> -->
-          <input class="btn upload" type="submit" name="can this be ommited">
+          {{ form }}
+          <input type="submit" class="btn">
         </div>
       </form>
     </div>
+    <script type="text/javascript" src="{% static 'js/upload.js' %}"></script>
   </div>
   <footer>
     <p>Sample text121</p>
