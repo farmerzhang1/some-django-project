@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'css/upload.css' %}">
     <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <!-- Create a simple CodeMirror instance -->
+    <link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+    <script src="{% static 'js/codemirror.js' %}"></script>
+    <!-- <script src="{% static 'js/javascript.js' %}"></script> -->
   </head>
   <body>
     <nav>
@@ -25,12 +29,27 @@
 
     <div class="upload-container">
       <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-        <div class="file-upload-wrapper" data-text="Select your file!">
-          {{ form }}
-          <input type="submit" class="btn">
+        <div class="file-upload-wrapper" data-text="请输入协议名称">
+          {{ form.file }}
         </div>
+        {{ form.text }}
+        <input type="submit" class="btn" value="协议上传">
       </form>
     </div>
+    <script>
+      var editor = CodeMirror.fromTextArea(document.getElementById('js-textarea'), {
+          lineNumbers: true
+      });
+      $(".file-upload-field").change(function(){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          $("#js-textarea").val(e.target.result);
+        };
+        reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
+        reader.onload = function() { editor.setValue(reader.result); }
+      });
+
+    </script>
     <script type="text/javascript" src="{% static 'js/upload.js' %}"></script>
   </div>
   <footer>
