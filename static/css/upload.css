@@ -4,7 +4,7 @@ body {
 }
 
 .upload-container {
-  position: absolute;
+  position: relative;
   top: 0;
   right: 0;
   bottom: 0;
@@ -40,13 +40,14 @@ body {
 }
 
 .form {
-  width: 400px;
+  width: 600px;
 }
 
 .file-upload-wrapper {
   position: relative;
-  width: 100%;
-  height: 60px;
+  width: 80%;
+  height: 100px;
+  left: 40px;
 }
 .file-upload-wrapper:after {
   content: attr(data-text);
@@ -67,7 +68,7 @@ body {
   font-weight: 300;
 }
 .file-upload-wrapper:before {
-  content: "Upload";
+  content: "查询";
   position: absolute;
   top: 0;
   right: 0;
@@ -111,9 +112,9 @@ textarea {
   width: 309px;
 }
 input[type="submit"] {
-  position: absolute;
-  top: 202px;
-  left: 150px;
+  position: relative;
+  /* top: 202px; */
+  left: 250px;
   z-index: 99;
   padding: 0;
   cursor: pointer;
