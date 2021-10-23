@@ -31,6 +31,7 @@
       <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
         <div class="file-upload-wrapper" data-text="请输入协议名称">
           {{ form.file }}
+          <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
         </div>
         {{ form.text }}
         <input type="submit" class="btn" value="协议上传">
@@ -40,6 +41,11 @@
       var editor = CodeMirror.fromTextArea(document.getElementById('js-textarea'), {
           lineNumbers: true
       });
+      //Hide
+      alert('pre hide')
+      $(editor.getWrapperElement()).hide();
+      alert('after hide')
+      //Show
       $(".file-upload-field").change(function(){
         var reader = new FileReader();
         reader.onload = function(e){
@@ -47,6 +53,8 @@
         };
         reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
         reader.onload = function() { editor.setValue(reader.result); }
+        $(editor.getWrapperElement()).show();
+        alert('after show')
       });
 
     </script>
