@@ -1,12 +1,17 @@
 {% load static %}
 <!DOCTYPE html>
-<html style="font-size: 16px;" class="u-responsive-xl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html style="font-size: 16px;">
 
-    <title>Formal Verification</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
-</style>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>Formal Verification</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+  </style>
 </head>
-  <body class="u-body">
+
+<body>
+  <div id="wrapper">
     <nav>
       <ul>
         <li>Main</li>
@@ -16,14 +21,16 @@
       </ul>
     </nav>
 
-      <section>
-        <div class="sub">
-          <h1>Formal Verification</h1>
-          <p>some words here blablabla</p>
-          <p>another one</p>
-          <a class="btn sub" href="{% url 'upload' %}">Test Your File</a>
-          </div></section>
-          <footer>
-            <p>Sample text121</p>
-          </div></footer>
-    </body></html>
+    <div class="sub">
+      <h1>Formal Verification</h1>
+      <p>some words here blablabla</p>
+      <p>another one</p>
+      <a class="btn sub" href="{% url 'upload' %}">Test Your File</a>
+    </div>
+    <footer>
+      <p>Sample text121</p>
+    </footer>
+  </div>
+</body>
+
+</html>

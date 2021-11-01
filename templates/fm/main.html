@@ -1,16 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
-<html style="font-size: 16px;" class="u-responsive-xl">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html style="font-size: 16px;">
 
-    <meta name="keywords" content="Our Features &amp; Services.">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>FM</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="keywords" content="Our Features &amp; Services.">
+  <meta name="description" content="">
+  <meta name="page_type" content="np-template-header-footer-from-plugin">
+  <title>FM</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
 </head>
-  <body>
+
+<body>
+  <div id="wrapper">
     <nav>
       <ul>
         <li class="active">Main</li>
@@ -19,43 +23,45 @@
         <li>3</li>
       </ul>
     </nav>
-    <section>
-      <div class="main">
-        <h4>Features</h4>
-        <h1>Security Protocol Analysis</h1>
-        <div class="list">
-          <div class="repeat">
-            <div class="block">
-              <div class="container">
-                <img src="{% static 'files/users-with-speech-bubbles-vector_53876-82250.jpg' %}" alt="pic 1" data-image-width="626" data-image-height="625">
-                <h4 class="header">Formal Verification</h4>
-                <p>TBD</p>
-                <a class="btn" href="{% url 'formal verification' %}">more</a>
-              </div>
+    <div class="main">
+      <h4>Features</h4>
+      <h1>Security Protocol Analysis</h1>
+      <div class="list">
+        <div class="repeat">
+          <div class="block">
+            <div class="container">
+              <img src="{% static 'files/users-with-speech-bubbles-vector_53876-82250.jpg' %}" alt="pic 1"
+                data-image-width="626" data-image-height="625">
+              <h4 class="header">Formal Verification</h4>
+              <p>TBD</p>
+              <a class="btn" href="{% url 'formal verification' %}">more</a>
             </div>
-            <div class="block">
-              <div class="container">
-                <img src="{% static 'files/fdf.jpg' %}" alt="pic 2" data-image-width="626" data-image-height="625">
-                <h4 class="header">Defect Prediction</h4>
-                <p>TBD</p>
-                <a class="btn" href="{% url 'defect prediction' %}">More</a>
-              </div>
+          </div>
+          <div class="block">
+            <div class="container">
+              <img src="{% static 'files/fdf.jpg' %}" alt="pic 2" data-image-width="626" data-image-height="625">
+              <h4 class="header">Defect Prediction</h4>
+              <p>TBD</p>
+              <a class="btn" href="{% url 'defect prediction' %}">More</a>
             </div>
-            <div class="block">
-              <div class="container">
-                <img src="{% static 'files/dsds.jpg' %}" alt="pic 3" data-image-width="626" data-image-height="626">
-                <h4 class="header">Defect Detection</h4>
-                <p>TBD</p>
-                <a class="btn" href="{% url 'defect detection' %}">more</a>
-              </div>
+          </div>
+          <div class="block">
+            <div class="container">
+              <img src="{% static 'files/dsds.jpg' %}" alt="pic 3" data-image-width="626" data-image-height="626">
+              <h4 class="header">Defect Detection</h4>
+              <p>TBD</p>
+              <a class="btn" href="{% url 'defect detection' %}">more</a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
 
-<footer>
-  <p>Sample text121</p>
-</footer>
-</body></html>
+    <footer>
+      <p>Sample text121</p>
+    </footer>
+  </div>
+</body>
+
+</html>
