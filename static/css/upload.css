@@ -114,10 +114,10 @@ textarea {
 input[type="submit"] {
   position: relative;
   /* top: 202px; */
-  left: 250px;
+  left: 120px;
   z-index: 99;
   padding: 0;
   cursor: pointer;
-  width: 80px;
+  width: 100px;
   height: 50px;
 }
