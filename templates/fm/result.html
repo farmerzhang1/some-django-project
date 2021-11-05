@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>The Starbuzz Bean Machine</title>
+  <title>result</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
 </head>
 
@@ -20,11 +20,16 @@
     </nav>
 
     <div class="sub">
-      <h1>Your Results</h1>
-      <p> {{ number.number }} </p>
+      <h1>验证结果</h1>
+      <!-- <h4> {{ result.header }} </h4> -->
+      <p> {{ result.filename }} </p>
+      {% for result in result.text %}
+      <p> {{ result }} </p>
+      {% endfor %}
+      <!-- {{ result.text }} -->
     </div>
     <footer>
-      <p>Sample text121</p>
+      <p>中国科学技术大学网络安全实验室</p>
     </footer>
   </div>
 </body>
