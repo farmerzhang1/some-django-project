@@ -30,12 +30,18 @@ def upload_file(request):
             with default_storage.open('tmp/something.spthy', 'wb+') as destination:
                 for chunk in file_obj.chunks():
                     destination.write(chunk)
-            process = subprocess.run([settings.BIN_ROOT+'bin', settings.MEDIA_ROOT+'tmp/something.spthy'], capture_output=True)
+            process = subprocess.run(['tamarin-prover', settings.MEDIA_ROOT+'tmp/something.spthy'], capture_output=True)
             output1 = process.stdout
-            print(output1)
+            # print(output1)
             print(request.FILES['file'])
-            print (form.cleaned_data)
-            request.session['temp_data'] = { 'number' : output1.decode('utf8') }
+            # print(request.POST.get())
+            print('fucku')
+            s = output1.decode('utf-8')
+            # print (s[s.find('summary of summaries'):])
+            results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
+            results[:] = [x.strip(' ') for x in results if x]
+            results[1] = 'analyzed: ' + request.FILES['file'].name
+            request.session['temp_data'] = { 'text' :  results[2:], 'header': results[0], 'filename': results[1]}
             return redirect('result')
         else:
             print('not valid!!!!')
@@ -47,4 +53,4 @@ def upload_file(request):
 def result(request):
     hello = request.session['temp_data']
     print(hello)
-    return render(request, 'fm/result.html', {'number': hello})
+    return render(request, 'fm/result.html', {'result': hello})
