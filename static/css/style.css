@@ -1,6 +1,7 @@
 .main {
   background-color: #c8e8e0;
   min-height: 800px;
+  min-height: 100%;
   box-sizing: border-box;
 }
 .sub {
@@ -35,7 +36,7 @@ h4.header {
   text-transform: none;
   font-weight: 700;
   font-size: 1.5rem;
-  margin: 25px auto 0;
+  margin: 10px auto 0;
 }
 h1 {
   text-transform: none;
@@ -44,7 +45,7 @@ h1 {
   margin: 0 auto 0;
   color: #2e937a;
   text-align: center;
-  padding: 30px;
+  padding: 30px 30px 40px;
 }
 p {
   color: #376358;
@@ -69,18 +70,16 @@ margin-bottom: -34px;
 margin-left: 30px;
 }
 .list {
-  width: 940px;
-  margin: 49px auto 0;
+  /* width: 940px; */
+  margin: 0 30px 0;
   display: flex;
   flex-direction: column;
   text-align: center;
   position: relative;
 }
 
-
-
 .repeat {
-  grid-template-columns: repeat(3, calc(33.333333333333336% - 18px));
+  grid-template-columns: repeat(4, calc(24% - 10px));
   min-height: 338px;
   grid-gap: 27px;
   display: grid;
@@ -90,11 +89,12 @@ margin-left: 30px;
   display: flex;
   position: relative;
   box-sizing: border-box;
+  max-width: 300px;
 }
 
 .container {
   border-radius: 20px;
-  padding: 20px 20px 40px;
+  padding: 20px 20px 20px;
   justify-content: flex-start;
   display: flex;
   flex-direction: column;
@@ -127,7 +127,7 @@ margin-left: 30px;
   text-decoration: none;
   box-sizing: border-box;
 }
-.btn.upload {
+.upload-btn {
   color: #ffffff;
   background-color: #2e937a;
   border-width: 1px;
@@ -136,9 +136,9 @@ margin-left: 30px;
   text-transform: uppercase;
   letter-spacing: 2px;
   border-style: solid;
-  margin: 0px auto 0;
+  margin: 15px 30px 0;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 50px;
   text-decoration: none;
   box-sizing: border-box;
 }
@@ -150,7 +150,7 @@ margin-left: 30px;
 footer {
   /* min-height: 59px; */
   margin-bottom:-50px;
-  /* height:50px; */
+  height:30px;
 }
 
 footer p {
