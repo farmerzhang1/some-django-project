@@ -49,6 +49,7 @@ body {
   height: 100px;
   left: 40px;
 }
+
 .file-upload-wrapper:after {
   content: attr(data-text);
   font-size: 18px;
@@ -67,6 +68,7 @@ body {
   border-radius: 5px 10px 10px 5px;
   font-weight: 300;
 }
+
 .file-upload-wrapper:before {
   content: "查询";
   position: absolute;
@@ -85,9 +87,11 @@ body {
   pointer-events: none;
   border-radius: 0 5px 5px 0;
 }
+
 /* div.file-upload-wrapper:hover:before {
   background: #c43398;
 } */
+
 .file-upload-wrapper input[type="file"] {
   opacity: 0;
   position: absolute;
@@ -111,6 +115,7 @@ textarea {
   left: 51px;
   width: 309px;
 }
+
 input[type="submit"] {
   position: relative;
   /* top: 202px; */
@@ -118,6 +123,6 @@ input[type="submit"] {
   z-index: 99;
   padding: 0;
   cursor: pointer;
-  width: 100px;
+  width: 115px;
   height: 50px;
 }

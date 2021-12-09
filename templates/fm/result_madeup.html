@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>result</title>
+  <link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+  <script src="{% static 'js/codemirror.js' %}"></script>
+  <script src="{% static 'js/simple.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+</head>
+
+<body>
+  <div id="wrapper">
+    <nav>
+      <ul>
+        <li class="active">Main</li>
+        <!-- <li>1</li>
+        <li>2</li>
+        <li>3</li> -->
+      </ul>
+    </nav>
+    <div class="sub">
+      <h1>验证结果</h1>
+      <img src="{% static 'files/tamarin_result.png' %}" width="40%">
+
+      <!-- <h4> {{ result.header }} </h4> -->
+      <div class="float">
+        <!-- {% for code in result.codes %}
+        <p> {{ code }} </p>
+        {% endfor %} -->
+        <textarea id="code">
+          {{ result.full_code }}
+        </textarea>
+        <p></p>
+        <textarea id="log">
+          {{ result.full_log }}
+        </textarea>
+        <!-- {% for log in result.logs %}
+        <p> {{ log }} </p>
+        {% endfor %} -->
+      </div>
+      <script src="{% static 'js/tamarin.js' %}"></script>
+      <script>
+        var code = CodeMirror.fromTextArea(document.getElementById('code'), {
+          lineNumbers: true,
+          mode: "spthy"
+        });
+        alert('should');
+        var log = CodeMirror.fromTextArea(document.getElementById('log'), {
+          lineNumbers: false,
+        });
+        code.setSize("100%", Infinity);
+        log.setSize("100%", Infinity);
+
+      </script>
+      <!-- {{ result.text }} -->
+    </div>
+    <footer>
+      <p>中国科学技术大学网络安全实验室</p>
+    </footer>
+  </div>
+</body>
+
+</html>
