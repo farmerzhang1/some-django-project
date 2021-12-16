@@ -1,6 +1,6 @@
 // import './codemirror.js'
 // import './simple.js';
-alert('didu run');
+// alert('didu run');
 CodeMirror.defineSimpleMode("spthy", {
     // The start state contains the rules that are initially used
     start: [

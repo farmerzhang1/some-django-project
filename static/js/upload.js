@@ -1,49 +1,60 @@
-$("form").on("change", ".file-upload-field", function(){
-    $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, '') );
+var spthy_editor = CodeMirror.fromTextArea(document.getElementById('spthy-content'), {
+  lineNumbers: true,
+  mode: "spthy"
 });
-$(".file-upload-field").change(function(){
-    var reader = new FileReader();
-    reader.onload = function(e){
-      $("#js-textarea").val(e.target.result);
-    };
-    reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
+var v_result = CodeMirror.fromTextArea(document.getElementById('v-result'), {
+  lineNumbers: true,
+  mode: "spthy"
+})
+v_result.setSize("100%", Infinity);
+// $(spthy_editor.getWrapperElement()).hide();
+
+$("form").on("change", ".file-upload-field", function () {
+  $(this).parent(".file-upload-wrapper").attr("data-text", $(this).val().replace(/.*(\/|\\)/, ''));
 });
 
-function _(el) {
-  return document.getElementById(el);
-}
+$(".file-upload-field").change(function () {
+  var reader = new FileReader();
+  reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
+  reader.onload = function () { spthy_editor.setValue(reader.result); $("#spthy-content").text(reader.result); }
+  spthy_editor.setSize("100%", Infinity);
+  $(spthy_editor.getWrapperElement()).show();
+});
 
-function uploadFile() {
-  var file = _("#file1").files[0];
-  alert(file.name+" | "+file.size+" | "+file.type);
-  var formdata = new FormData();
-  formdata.append("file1", file);
-  var ajax = new XMLHttpRequest();
-  ajax.upload.addEventListener("progress", progressHandler, false);
-  ajax.addEventListener("load", completeHandler, false);
-  ajax.addEventListener("error", errorHandler, false);
-  ajax.addEventListener("abort", abortHandler, false);
-  ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-  //use file_upload_parser.php from above url
-  ajax.send(formdata);
-}
+// $('.form').on('submit', function (e) {
+//   e.preventDefault();
+//   if ($(this).attr("value") == "load model") {
+//     spthy_editor.setValue("reader.result");
+//     $("#spthy-content").text("reader.result");
+//   }
+//   else {
+//     var buf = $(this).find('#spthy-content').val();
+//     $.get('/tamarin/',
+//       { 'buf': buf },
+//       function (response) { $('.res').text(response.msg); }
+//     );
+//   }
+// });
 
-function progressHandler(event) {
-  _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-  var percent = (event.loaded / event.total) * 100;
-  _("progressBar").value = Math.round(percent);
-  _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-}
-
-function completeHandler(event) {
-  _("status").innerHTML = event.target.responseText;
-  _("progressBar").value = 0; //wil clear progress bar after successful upload
-}
-
-function errorHandler(event) {
-  _("status").innerHTML = "Upload Failed";
-}
-
-function abortHandler(event) {
-  _("status").innerHTML = "Upload Aborted";
-}
+$(".form button").click(function (e) {
+  e.preventDefault()// cancel form submission
+  alert('test!');
+  if ($(this).attr("value") == "load model") {
+    var filename = $('select#model-select').val();
+    alert(filename);
+    $.get('/load_file/', { 'filename': filename },
+      function (response) {
+        $(spthy_editor.getWrapperElement()).show();
+        spthy_editor.setValue(response.file);
+        $("#spthy-content").text(response.file);
+      })
+  }
+  else {
+    var buf = $('#spthy-content').val();
+    alert(buf);
+    $.get('/tamarin/',
+      { 'buf': buf },
+      function (response) { $('textarea#v-result').text(response.msg); v_result.setValue(response.msg); }
+    );
+  }
+});

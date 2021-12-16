@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>upload</title>
+  <link rel="stylesheet" href="{% static 'css/codemirror.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+  <link rel="stylesheet" href="{% static 'css/upload.css' %}">
+  <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+  <!-- Create a simple CodeMirror instance -->
+  <script src="{% static 'js/codemirror.js' %}"></script>
+  <script src="{% static 'js/simple.js' %}"></script>
+  <!-- <script src="{% static 'js/javascript.js' %}"></script> -->
+</head>
+
+<body>
+  <div id="wrapper">
+    <nav>
+      <ul>
+        <li><a href="{% url 'main' %}">首页</a></li>
+      </ul>
+    </nav>
+
+    <div class="sub">
+      <h1>协议形式化验证</h1>
+
+      <!-- <div class="upload-container">
+        <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+          <div class="file-upload-wrapper" data-text="请输入协议名称">
+            {{ form.file }}
+          </div>
+          {{ form.text }}
+          {{ form.select }}
+          <button type="submit" class="upload-btn" value="load model">协议上传</button>
+          <button type="submit" class="upload-btn" value="verification">协议验证</button>
+        </form>
+      </div>
+      <div class="result-container">
+        <textarea class="res"></textarea>
+      </div>
+      <script src="{% static 'js/tamarin.js' %}"></script>
+      <script src="{% static 'js/upload.js' %}"></script>
+    </div> -->
+      <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+        <table align="center">
+          <tbody>
+            <tr>
+              <td valign="top">
+                <b>Select Protocol</b>
+                <p>{{ form.select }}</p>
+                <p>
+                  <button type="submit" value="load model">协议上传</button>
+                </p>
+              </td>
+              <td valign="top">
+                <b>or enter your protocol below, or, upload your file {{form.file}}</b>
+                {{ form.text }}
+                <button type="submit" value="verification">协议验证</button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <b>SmartVerif text output</b>
+                <textarea id="v-result" rows="20" cols="125"></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <script src="{% static 'js/tamarin.js' %}"></script>
+        <script src="{% static 'js/upload.js' %}"></script>
+      </form>
+    </div>
+    <footer>
+      <p>中国科学技术大学网络安全实验室</p>
+    </footer>
+  </div>
+</body>
+
+</html>

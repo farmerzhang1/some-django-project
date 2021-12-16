@@ -1,5 +1,6 @@
+from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.files.storage import default_storage
 from .forms import *
 import subprocess
@@ -25,40 +26,51 @@ screenshot = False
 def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            if screenshot:
-                code = open(settings.MEDIA_ROOT + 'kea_plus_AdvKey.spthy')
-                code_str = code.read()
-                code_list = code_str.split('\n')
-                code_list[:] = [x for x in code_list if x]
-                log = open(settings.MEDIA_ROOT + 'kea_plus_AdvKey_result.log')
-                log_str = log.read()
-                log_list = log_str.split('\n')
-                log_list[:] = [x for x in log_list if x]
-                request.session['temp_data'] = { 'logs': log_list, 'codes' : code_list, 
-                'full_code': code_str, 'full_log': log_str}
-            else:
-                file_obj = request.FILES['file']
-
-                with default_storage.open('tmp/something.spthy', 'wb+') as destination:
-                    for chunk in file_obj.chunks():
-                        destination.write(chunk)
-                process = subprocess.run(['tamarin-prover', settings.MEDIA_ROOT+'tmp/something.spthy'], capture_output=True)
-                output1 = process.stdout
-                s = output1.decode('utf-8')
-                results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
-                results[:] = [x.strip(' ') for x in results if x]
-                results[1] = 'analyzed: ' + request.FILES['file'].name
-                request.session['temp_data'] = { 'text' :  results[2:], 'header': results[0], 'filename': results[1]}
-            return redirect('result')
-        else:
-            print('not valid!!!!')
-            print(form.errors)
     else:
         form = UploadFileForm()
     return render(request, 'fm/upload.html', {'form': form})
 
+def upload_new(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+    else:
+        form = UploadFileForm()
+    return render(request, 'fm/upload_new.html', {'form': form})
+
 def result(request):
     hello = request.session['temp_data']
+    hello["list"] = ["one", "two", "three"]
     # print(hello)
-    return render(request, 'fm/result.html', {'result': hello})
+    return render(request, 'fm/result.html', hello)
+
+def run_tamarin(request):
+    data = {'msg': ''}
+    if request.method == 'GET':
+        buffer = request.GET.get('buf')
+        # print(buffer)
+        path = 'tmp/something.spthy'
+        default_storage.delete(path)
+        path = default_storage.save(path, ContentFile(buffer))
+        # print(path)
+        process = subprocess.run(['tamarin-prover', settings.MEDIA_ROOT+path], capture_output=True)
+        output1 = process.stdout
+        s = output1.decode('utf-8')
+        # print(s)
+        results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
+        results[:] = [x.strip(' ') for x in results if x]
+        # data['msg'] = request.FILES['file'].name
+        data['msg'] = s
+        return JsonResponse(data)
+
+    return JsonResponse(data)
+
+def load_file(request):
+    data = {'file' : ''}
+    if request.method == 'GET':
+        filename = request.GET.get('filename').lower()
+        path = 'tamarin/' + filename + '.spthy'
+        str = default_storage.open(path).read().decode('utf-8')
+        data['file'] = str
+        # print(str)
+        return JsonResponse(data)
+    return JsonResponse(data)
