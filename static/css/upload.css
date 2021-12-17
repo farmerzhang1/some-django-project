@@ -129,11 +129,14 @@ input[type="submit"] {
 
 button[type="submit"] {
   position: relative;
-  /* top: 202px; */
   left: 120px;
   z-index: 99;
   padding: 0;
   cursor: pointer;
   width: 115px;
   height: 50px;
+}
+
+button[type="submit"].upload-new {
+  left: 0;
 }

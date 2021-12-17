@@ -6,7 +6,9 @@ var v_result = CodeMirror.fromTextArea(document.getElementById('v-result'), {
   lineNumbers: true,
   mode: "spthy"
 })
-v_result.setSize("100%", Infinity);
+v_result.setSize("60%", 200);
+spthy_editor.setSize(500, 200);
+
 // $(spthy_editor.getWrapperElement()).hide();
 
 $("form").on("change", ".file-upload-field", function () {
@@ -15,26 +17,12 @@ $("form").on("change", ".file-upload-field", function () {
 
 $(".file-upload-field").change(function () {
   var reader = new FileReader();
+  // file-upload-field is defined in forms.py
   reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
   reader.onload = function () { spthy_editor.setValue(reader.result); $("#spthy-content").text(reader.result); }
-  spthy_editor.setSize("100%", Infinity);
+  // spthy_editor.setSize("100%", Infinity);
   $(spthy_editor.getWrapperElement()).show();
 });
-
-// $('.form').on('submit', function (e) {
-//   e.preventDefault();
-//   if ($(this).attr("value") == "load model") {
-//     spthy_editor.setValue("reader.result");
-//     $("#spthy-content").text("reader.result");
-//   }
-//   else {
-//     var buf = $(this).find('#spthy-content').val();
-//     $.get('/tamarin/',
-//       { 'buf': buf },
-//       function (response) { $('.res').text(response.msg); }
-//     );
-//   }
-// });
 
 $(".form button").click(function (e) {
   e.preventDefault()// cancel form submission
