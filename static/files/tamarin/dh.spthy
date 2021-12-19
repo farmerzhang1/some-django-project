@@ -1,0 +1,16 @@
+theory DiffleHellman
+begin
+
+builtins: hashing, asymmetric-encryption
+
+rule Register_pk:
+   [ Fr(~ltk) ]
+      -->
+   [ !Ltk($A, ~ltk), !Pk($A, pk(~ltk)) ]
+
+rule Get_pk:
+   [ !Pk(A, pubkey) ]
+      -->
+   [ Out(pubkey) ]
+
+end

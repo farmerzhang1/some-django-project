@@ -1,0 +1,16 @@
+theory Simple
+begin
+
+builtins: hashing, asymmetric-encryption
+
+rule Simple_Register_pk:
+   [ Fr(~ltk) ]
+      -->
+   [ !Ltk($A, ~ltk), !Pk($A, pk(~ltk)) ]
+
+rule Simple_Get_pk:
+   [ !Pk(A, pubkey) ]
+      -->
+   [ Out(pubkey) ]
+
+end
