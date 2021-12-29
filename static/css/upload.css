@@ -43,6 +43,10 @@ body {
   width: 600px;
 }
 
+.upload-new.form {
+  width: auto;
+}
+
 .file-upload-wrapper {
   position: relative;
   width: 80%;

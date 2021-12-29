@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <title>result</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
+  <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
 </head>
 
 <body>
@@ -22,11 +23,31 @@
     <div class="sub">
       <h1>验证结果</h1>
       <!-- <h4> {{ result.header }} </h4> -->
-      <p> {{ result.filename }} </p>
-      {% for result in result.text %}
+      <p> {{ filename }} </p>
+      {% for result in text %}
       <p> {{ result }} </p>
       {% endfor %}
+
+      {% for item in list %}
+      <p> {{ item }} </p>
+      {% endfor %}
+
       <!-- {{ result.text }} -->
+      <p id="response_msg"></p>
+      <form id="username_exists_form" method='GET'>
+        Name: <input type="username" name="username" />
+        <button type='submit'> Check </button>
+      </form>
+      <script type="text/javascript">
+        $('#username_exists_form').on('submit', function (e) {
+          e.preventDefault();
+          var username = $(this).find('input').val();
+          $.get('/json_test/',
+            { 'username': username },
+            function (response) { $('#response_msg').text(response.msg); }
+          );
+        });
+      </script>
     </div>
     <footer>
       <p>中国科学技术大学网络安全实验室</p>

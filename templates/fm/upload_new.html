@@ -10,10 +10,8 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}" media="screen">
   <link rel="stylesheet" href="{% static 'css/upload.css' %}">
   <script type="text/javascript" src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-  <!-- Create a simple CodeMirror instance -->
   <script src="{% static 'js/codemirror.js' %}"></script>
   <script src="{% static 'js/simple.js' %}"></script>
-  <!-- <script src="{% static 'js/javascript.js' %}"></script> -->
 </head>
 
 <body>
@@ -25,26 +23,8 @@
     </nav>
 
     <div class="sub">
-      <h1>协议形式化验证</h1>
-
-      <!-- <div class="upload-container">
-        <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
-          <div class="file-upload-wrapper" data-text="请输入协议名称">
-            {{ form.file }}
-          </div>
-          {{ form.text }}
-          {{ form.select }}
-          <button type="submit" class="upload-btn" value="load model">协议上传</button>
-          <button type="submit" class="upload-btn" value="verification">协议验证</button>
-        </form>
-      </div>
-      <div class="result-container">
-        <textarea class="res"></textarea>
-      </div>
-      <script src="{% static 'js/tamarin.js' %}"></script>
-      <script src="{% static 'js/upload.js' %}"></script>
-    </div> -->
-      <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+      <h1>协议形式化建模</h1>
+      <form class="upload-new form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
         <table align="center">
           <tbody>
             <tr>
@@ -52,19 +32,25 @@
                 <b>Select Protocol</b>
                 <p class="wrap">{{ form.select }}</p>
                 <p class="wrap">
-                  <button type="submit" value="load model" class="upload-new upload-btn">协议上传</button>
+                  <button type="submit" value="load model" class="upload-new upload-btn">协议加载</button>
+                  <!-- <button type="submit" value="add" class="upload-new upload-btn">协议上传</button> -->
+                  <button type="submit" value="delete" class="upload-new upload-btn">协议删除</button>
                 </p>
               </td>
               <td valign="top">
-                <b>or enter your protocol below, or, upload your file {{form.file}}</b>
+                <b>上传文件 {{ form.file }}</b>
+                <button type="submit" value="add" class="upload-new upload-btn">协议上传</button> 
                 {{ form.text }}
-                <p class="wrap"><button type="submit" value="verification" class="upload-new upload-btn">协议验证</button></p>
+                <p class="wrap"><button type="submit" value="verification" class="upload-new upload-btn">协议验证</button>
+                </p>
               </td>
             </tr>
             <tr>
               <td colspan="2">
                 <b>SmartVerif text output</b>
+                <p>
                 <textarea id="v-result" rows="20" cols="125"></textarea>
+                </p>
               </td>
             </tr>
           </tbody>

@@ -21,52 +21,28 @@
     <nav>
       <ul>
         <li><a href="{% url 'main' %}">首页</a></li>
-        <!-- <li>1</li>
-        <li>2</li>
-        <li>3</li> -->
       </ul>
     </nav>
 
     <div class="sub">
       <h1>协议形式化验证</h1>
-      <!-- <h2>Upload your file and give it a try!</h2> -->
 
       <div class="upload-container">
         <form class="form" method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
           <div class="file-upload-wrapper" data-text="请输入协议名称">
             {{ form.file }}
-            <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
           </div>
           {{ form.text }}
-          <input type="submit" class="upload-btn" value="协议上传">
-          <input type="submit" class="upload-btn" value="协议验证">
+          {{ form.select }}
+          <button type="submit" class="upload-btn" value="load model">协议上传</button>
+          <button type="submit" class="upload-btn" value="verification">协议验证</button>
         </form>
       </div>
+      <div class="result-container">
+        <textarea class="res"></textarea>
+      </div>
       <script src="{% static 'js/tamarin.js' %}"></script>
-      <script>
-        var editor = CodeMirror.fromTextArea(document.getElementById('js-textarea'), {
-          lineNumbers: true,
-          mode: "spthy"
-        });
-        //Hide
-        // alert('pre hide')
-        $(editor.getWrapperElement()).hide();
-        // alert('after hide')
-        //Show
-        $(".file-upload-field").change(function () {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#js-textarea").val(e.target.result);
-          };
-          reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
-          reader.onload = function () { editor.setValue(reader.result); }
-          editor.setSize("100%", Infinity);
-          $(editor.getWrapperElement()).show();
-          // alert('after show')
-        });
-
-      </script>
-      <script type="text/javascript" src="{% static 'js/upload.js' %}"></script>
+      <script src="{% static 'js/upload.js' %}"></script>
     </div>
     <footer>
       <p>中国科学技术大学网络安全实验室</p>

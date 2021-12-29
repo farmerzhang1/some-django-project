@@ -26,7 +26,7 @@ $(".file-upload-field").change(function () {
 
 $(".form button").click(function (e) {
   e.preventDefault()// cancel form submission
-  alert('test!');
+  // alert('test!');
   if ($(this).attr("value") == "load model") {
     var filename = $('select#model-select').val();
     alert(filename);
@@ -37,12 +37,14 @@ $(".form button").click(function (e) {
         $("#spthy-content").text(response.file);
       })
   }
-  else {
+  else if ($(this).attr("value") == "verification") {
     var buf = $('#spthy-content').val();
     alert(buf);
     $.get('/tamarin/',
       { 'buf': buf },
       function (response) { $('textarea#v-result').text(response.msg); v_result.setValue(response.msg); }
     );
+  } else {
+
   }
 });
