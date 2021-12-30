@@ -4,6 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core.files.storage import default_storage
 from .forms import *
 import subprocess
+from os import listdir
+from os.path import isfile, join
 from django.conf import settings
 # Create your views here.
 def mainPage(request):
@@ -31,10 +33,12 @@ def upload_file(request):
     return render(request, 'fm/upload.html', {'form': form})
 
 def upload_new(request):
+    tamarin_path = join(settings.MEDIA_ROOT, 'tamarin')
+    flist = [(f[:-6], f[:-6].upper()) for f in listdir(tamarin_path)]
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadFileForm(flist, request.POST, request.FILES)
     else:
-        form = UploadFileForm()
+        form = UploadFileForm(flist)
     return render(request, 'fm/upload_new.html', {'form': form})
 
 def result(request):
@@ -56,10 +60,14 @@ def run_tamarin(request):
         output1 = process.stdout
         s = output1.decode('utf-8')
         # print(s)
-        results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
-        results[:] = [x.strip(' ') for x in results if x]
+        if s.find('All well-formedness checks were successful') != -1:
+            data['msg'] = '成功\n'
+        else:
+            data['msg'] = '语法错误\n'
+        # results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
+        # results[:] = [x.strip(' ') for x in results if x]
         # data['msg'] = request.FILES['file'].name
-        data['msg'] = s
+        # data['msg'] = s
         return JsonResponse(data)
 
     return JsonResponse(data)
@@ -67,10 +75,30 @@ def run_tamarin(request):
 def load_file(request):
     data = {'file' : ''}
     if request.method == 'GET':
-        filename = request.GET.get('filename').lower()
+        filename = request.GET.get('filename')
         path = 'tamarin/' + filename + '.spthy'
         str = default_storage.open(path).read().decode('utf-8')
         data['file'] = str
         # print(str)
         return JsonResponse(data)
     return JsonResponse(data)
+
+def delete_file(request):
+    if request.method == 'GET':
+        filename = request.GET.get('filename')
+        path = 'tamarin/' + filename + '.spthy'
+        if (filename not in default_files):
+            default_storage.delete(path)
+            print('deleted! '+path)
+            return redirect(upload_new)
+    return JsonResponse({})
+
+def add_file(request):
+    if request.method == 'GET':
+        filename = request.GET.get('filename')
+        text = request.GET.get('text')
+        path = 'tamarin/' + filename # assume it's spthy file, reject in javascript if not
+        default_storage.delete(path)
+        default_storage.save(path, ContentFile(text))
+        return redirect(upload_new)
+    return JsonResponse({})

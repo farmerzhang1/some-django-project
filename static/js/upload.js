@@ -38,13 +38,26 @@ $(".form button").click(function (e) {
       })
   }
   else if ($(this).attr("value") == "verification") {
-    var buf = $('#spthy-content').val();
+    var buf = spthy_editor.getValue();
     alert(buf);
     $.get('/tamarin/',
       { 'buf': buf },
       function (response) { $('textarea#v-result').text(response.msg); v_result.setValue(response.msg); }
     );
-  } else {
-
+  } else if ($(this).attr("value") == "delete") {
+    var filename = $('select#model-select').val();
+    alert(filename);
+    $.get('/delete_file/', { 'filename': filename }, function (response) {
+      alert('what do i do?');
+    })
+  } else if ($(this).attr("value") == "add") {
+    var reader = new FileReader();
+    reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
+    var filename = $(".file-upload-field")[0].files[0].name;
+    alert(spthy_editor.getValue());
+    $.get('/add_file/', { 'filename' : filename, 'text' : spthy_editor.getValue()}, function (response) {
+      alert('what???');
+    })
+    // reader.onload = function () { spthy_editor.setValue(reader.result); $("#spthy-content").text(reader.result); }
   }
 });
