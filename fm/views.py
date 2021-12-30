@@ -56,14 +56,18 @@ def run_tamarin(request):
         default_storage.delete(path)
         path = default_storage.save(path, ContentFile(buffer))
         # print(path)
-        process = subprocess.run(['tamarin-prover', settings.MEDIA_ROOT+path], capture_output=True)
-        output1 = process.stdout
-        s = output1.decode('utf-8')
-        # print(s)
-        if s.find('All well-formedness checks were successful') != -1:
-            data['msg'] = '成功\n'
-        else:
-            data['msg'] = '语法错误\n'
+        try:
+            process = subprocess.run(['fore-tamarin', settings.MEDIA_ROOT+path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            process.check_returncode()
+            s = process.stdout.decode('utf-8')
+            # print(s)
+            if s.find('All well-formedness checks were successful') != -1:
+                data['msg'] = '成功\n'
+            else:
+                data['msg'] = '语法错误\n'
+        except subprocess.CalledProcessError as e:
+            s = e.stderr.decode('utf-8')
+            data['msg'] = s[s.find('('):s.find('CallStack')]
         # results = s[s.find('summary of summaries'):].strip('\n').strip('=').split('\n')
         # results[:] = [x.strip(' ') for x in results if x]
         # data['msg'] = request.FILES['file'].name
