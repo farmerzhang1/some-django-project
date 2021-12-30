@@ -84,14 +84,17 @@ def load_file(request):
     return JsonResponse(data)
 
 def delete_file(request):
+    data = {'success': False}
     if request.method == 'GET':
         filename = request.GET.get('filename')
         path = 'tamarin/' + filename + '.spthy'
         if (filename not in default_files):
             default_storage.delete(path)
             print('deleted! '+path)
-            return redirect(upload_new)
-    return JsonResponse({})
+            data['success'] = True
+            # return redirect(upload_new)
+            return JsonResponse(data)
+    return JsonResponse(data)
 
 def add_file(request):
     if request.method == 'GET':
@@ -100,5 +103,5 @@ def add_file(request):
         path = 'tamarin/' + filename # assume it's spthy file, reject in javascript if not
         default_storage.delete(path)
         default_storage.save(path, ContentFile(text))
-        return redirect(upload_new)
+        # return redirect(upload_new)
     return JsonResponse({})

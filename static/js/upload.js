@@ -29,7 +29,7 @@ $(".form button").click(function (e) {
   // alert('test!');
   if ($(this).attr("value") == "load model") {
     var filename = $('select#model-select').val();
-    alert(filename);
+    // alert(filename);
     $.get('/load_file/', { 'filename': filename },
       function (response) {
         $(spthy_editor.getWrapperElement()).show();
@@ -39,25 +39,32 @@ $(".form button").click(function (e) {
   }
   else if ($(this).attr("value") == "verification") {
     var buf = spthy_editor.getValue();
-    alert(buf);
+    // alert(buf);
     $.get('/tamarin/',
       { 'buf': buf },
       function (response) { $('textarea#v-result').text(response.msg); v_result.setValue(response.msg); }
     );
   } else if ($(this).attr("value") == "delete") {
     var filename = $('select#model-select').val();
-    alert(filename);
-    $.get('/delete_file/', { 'filename': filename }, function (response) {
-      alert('what do i do?');
-    })
+    // alert(filename);
+    $.get('/delete_file/', { 'filename': filename }, function(res) {
+      if (res.success) {
+        location.reload();
+      } else {
+        alert(filename + ' can\'t be deleted');
+      }
+    });
   } else if ($(this).attr("value") == "add") {
     var reader = new FileReader();
     reader.readAsText($(".file-upload-field")[0].files[0], "UTF-8");
     var filename = $(".file-upload-field")[0].files[0].name;
-    alert(spthy_editor.getValue());
-    $.get('/add_file/', { 'filename' : filename, 'text' : spthy_editor.getValue()}, function (response) {
-      alert('what???');
-    })
+    if (filename.substr(-6) != '.spthy') {
+      alert('not spthy file');
+    } else {
+      // alert(spthy_editor.getValue());
+      $.get('/add_file/', { 'filename': filename, 'text': spthy_editor.getValue() });
+      location.reload();
+    }
     // reader.onload = function () { spthy_editor.setValue(reader.result); $("#spthy-content").text(reader.result); }
   }
 });
